@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Date, DateTime, ForeignKey, BigInteger
+from sqlalchemy import Column, Integer, String, Date, DateTime, ForeignKey, BigInteger 
 from sqlalchemy.orm import relationship, validates
 from database import Base
 from datetime import datetime, date
@@ -59,7 +59,7 @@ class VoterLoginCredentials(Base):
 class VoterAddress(Base):
     __tablename__ = 'voter_address'
     
-    address_id = Column(BigInteger, primary_key=True, autoincrement=True)
+    address_id = Column(Integer, primary_key=True, autoincrement=True)  
     voter_id = Column(String(36), ForeignKey('voters.voter_id', ondelete='CASCADE'), nullable=False)
     address_line_1 = Column(String(255), nullable=False)
     ward = Column(String(100), nullable=False)
