@@ -1,0 +1,106 @@
+from datetime import datetime, date  # ← ADD 'date' import here
+from typing import Dict, List, Tuple, Optional, Callable
+
+def validate_date(date_str: str) -> bool:
+    try:
+        datetime.strptime(date_str, '%Y-%m-%d')
+        return True
+    except ValueError:
+        return False
+
+def validate_country_code(country: str) -> bool:
+    return len(country) == 2 and country.isalpha()
+
+def get_validated_input(prompt: str, validation_func: Optional[Callable] = None, error_msg: str = "Invalid input") -> str:
+    while True:
+        try:
+            value = input(prompt).strip()
+            if validation_func and not validation_func(value):
+                raise ValueError(error_msg)
+            return value
+        except ValueError as e:
+            print(f"Error: {e}")
+
+def format_voter_info(voter) -> str:
+    voter_data: Dict = {
+        'voter_id': voter.voter_id,
+        'name': f"{voter.first_name} {voter.last_name}",
+        'national_id': voter.national_id_number,
+        'dob': voter.date_of_birth,
+        'registered': voter.registration_date
+    }
+    
+    lines: List[str] = [
+        "Voter Information:",
+        f"  ID: {voter_data['voter_id']}",
+        f"  Name: {voter_data['name']}",
+        f"  National ID: {voter_data['national_id']}",
+        f"  Date of Birth: {voter_data['dob']}",
+        f"  Registered: {voter_data['registered']}"
+    ]
+    return "\n".join(lines)
+
+def format_address_info(address) -> str:
+    address_data: Dict = {
+        'type': address.address_type,
+        'address': address.address_line_1,
+        'ward': address.ward,
+        'county': address.county,
+        'postal': address.postal_code,
+        'country': address.country
+    }
+    
+    lines: List[str] = [
+        f"  {address_data['type']} Address:",
+        f"    {address_data['address']}",
+        f"    {address_data['ward']}, {address_data['county']}",
+        f"    {address_data['postal']}, {address_data['country']}"
+    ]
+    return "\n".join(lines)
+
+def create_voter_dict(national_id: str, title: str, first_name: str, middle_name: str, 
+                     last_name: str, dob: date) -> Dict:
+    return {
+        'national_id_number': national_id,
+        'title': title,
+        'first_name': first_name,
+        'middle_name': middle_name,
+        'last_name': last_name,
+        'date_of_birth': dob
+    }
+def display_voters_table(voters):
+    """Display voters in a table format"""
+    if not voters:
+        print("No voters found.")
+        return
+    
+    table_data = []
+    for voter in voters:
+        table_data.append([
+            voter.national_id_number,
+            f"{voter.first_name} {voter.last_name}",
+            voter.date_of_birth,
+            voter.registration_date.strftime("%Y-%m-%d %H:%M")
+        ])
+    
+    headers = ["National ID", "Name", "Date of Birth", "Registered On"]
+    print(tabulate(table_data, headers=headers, tablefmt="grid"))
+
+def display_voters_table(voters):
+    """Display voters in a table format"""
+    if not voters:
+        print("No voters found.")
+        return
+    
+    table_data = []
+    for voter in voters:
+        table_data.append([
+            voter.national_id_number,
+            f"{voter.first_name} {voter.last_name}",
+            voter.date_of_birth,
+            voter.registration_date.strftime("%Y-%m-%d %H:%M")
+        ])
+    
+    headers = ["National ID", "Name", "Date of Birth", "Registered On"]
+    from tabulate import tabulate
+    print(tabulate(table_data, headers=headers, tablefmt="grid"))
