@@ -21,6 +21,29 @@ voters/
 - Tabular display of voter data
 - Relationship management between voters and addresses
 
+## Function Workflow
+
+### register-voter command
+- Prompts for national ID, personal details, and address information
+- Validates date format, country codes, and required fields
+- Creates Voter and VoterAddress records in database
+- Returns success message with voter summary
+
+### find-voter command  
+- Searches by national ID using SQLAlchemy queries
+- Displays formatted voter information using `format_voter_info()`
+- Shows associated address if available using `format_address_info()`
+
+### list-voters command
+- Retrieves all voters using SQLAlchemy ORM
+- Displays in tabular format using `display_voters_table()`
+- Shows total count of registered voters
+
+### delete-voter command
+- Finds voter by national ID
+- Deletes associated address records first (cascade)
+- Removes voter record after confirmation
+
 ## Database Schema
 
 1. **voters** - Core voter information
