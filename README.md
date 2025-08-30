@@ -34,9 +34,18 @@ voters/
    - Complete address fields (street, ward, subcounty, county, postal code, country)
    - Foreign key relationship to voters
 
+## Usage 
+python cli.py init_db_command    # Initialize database
+python cli.py register-voter     # Register new voter
+python cli.py find-voter         # Find voter by ID
+python cli.py list-voters        # List all voters
+python cli.py delete-voter       # Delete voter by ID
+
 ## Installation
 
 1. **Clone the repository**:
 ```bash
 git clone <https://github.com/Moses-omondi02/my-python-project>
 cd voters
+
+
