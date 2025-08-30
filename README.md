@@ -44,6 +44,14 @@ voters/
 - Deletes associated address records first (cascade)
 - Removes voter record after confirmation
 
+## Validation Rules
+
+- **National ID**: Minimum 5 characters (`validate_national_id`)
+- **Date of Birth**: YYYY-MM-DD format, must be 18+ years old (`validate_dob`)  
+- **Country Code**: 2-letter ISO code (`validate_country_code`)
+- **Names**: Non-empty with whitespace trimming (`validate_name`)
+- **Address**: All fields required (`validate_address_data`)
+
 ## Database Schema
 
 1. **voters** - Core voter information
