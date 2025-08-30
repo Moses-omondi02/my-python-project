@@ -1,6 +1,16 @@
 # my-python-project
 A command-line application for managing voter registrations with SQLite database storage, built with Python, SQLAlchemy, and Click.
 
+## Project Structure
+
+voters/
+├── cli.py              # Main CLI application using Click
+├── database.py         # Database configuration and connection management
+├── models.py           # SQLAlchemy ORM models (Voter, VoterAddress, VoterLoginCredentials)
+├── utils.py            # Utility functions (validation, formatting, data creation)
+├── README.md           # This file
+└── voter_registration.db # SQLite database (created automatically)
+
 ## Features
 
 - Voter registration with complete personal information
@@ -24,4 +34,3 @@ A command-line application for managing voter registrations with SQLite database
    - Complete address fields (street, ward, subcounty, county, postal code, country)
    - Foreign key relationship to voters
 
-   
