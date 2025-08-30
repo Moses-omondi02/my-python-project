@@ -1,6 +1,13 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy.ext.declarative import declarative_base
+from alembic import command
+from alembic.config import Config
+
+def init_db():
+    alembic_cfg = Config("alembic.ini")
+    command.upgrade(alembic_cfg, "head")
+
 
 DATABASE_URL = 'sqlite:///voter_registration.db'
 
