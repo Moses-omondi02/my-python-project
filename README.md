@@ -34,3 +34,9 @@ voters/
    - Complete address fields (street, ward, subcounty, county, postal code, country)
    - Foreign key relationship to voters
 
+## Installation
+
+1. **Clone the repository**:
+```bash
+git clone <your-repo-url>
+cd voters
