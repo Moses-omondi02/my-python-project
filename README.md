@@ -38,5 +38,5 @@ voters/
 
 1. **Clone the repository**:
 ```bash
-git clone <your-repo-url>
+git clone <https://github.com/Moses-omondi02/my-python-project>
 cd voters

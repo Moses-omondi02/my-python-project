@@ -16,7 +16,6 @@ class Voter(Base):
     date_of_birth = Column(Date, nullable=False)
     registration_date = Column(DateTime, nullable=False, default=datetime.utcnow)
     
-    credentials = relationship("VoterLoginCredentials", back_populates="voter", uselist=False, cascade="all, delete-orphan")
     addresses = relationship("VoterAddress", back_populates="voter", cascade="all, delete-orphan")
     
     @validates('national_id_number')
@@ -41,20 +40,6 @@ class Voter(Base):
             raise ValueError("Voter must be at least 18 years old")
         return dob
 
-class VoterLoginCredentials(Base):
-    __tablename__ = 'voter_login_credentials'
-    
-    voter_id = Column(String(36), ForeignKey('voters.voter_id', ondelete='CASCADE'), primary_key=True)
-    password = Column(String(255), nullable=False)
-    last_password_change = Column(DateTime, nullable=False, default=datetime.utcnow)
-    
-    voter = relationship("Voter", back_populates="credentials")
-    
-    @validates('password')
-    def validate_password(self, key, password):
-        if len(password) < 4:
-            raise ValueError("Password must be at least 4 characters long")
-        return password
 
 class VoterAddress(Base):
     __tablename__ = 'voter_address'
